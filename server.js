@@ -5,7 +5,7 @@ const cors = require('cors');
 const multer = require('multer');
 
 const app = express();
-const upload = multer({ dest: './uploads' });
+const upload = multer({ dest: './' });
 app.use(cors());
 
 
@@ -22,7 +22,7 @@ app.get('/hello', function (req, res) {
 app.post('/api/fileanalyse', upload.single('upfile'), (req, res) => {
   const { originalname, mimetype, size, filename } = req.file;
   res.json({ name: originalname, type: mimetype, size });
-  unlink(`./uploads/${filename}`, error => {
+  unlink(`./${filename}`, error => {
     if(error){
       console.log(error)
       return
